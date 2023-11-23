@@ -10,7 +10,7 @@ public class Category {
 
     @Id @GeneratedValue
     @Column(name = "Category_id")
-    private int id;
+    private Long id;
 
     private String name;
 }
