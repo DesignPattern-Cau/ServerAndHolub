@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class HolubConnection {
     private static HolubConnection INSTANCE = null;
-    private static final String driverName = "com.holub.database.jdbc.JDBCDriver";
+    private static final String driverName = "holub.database.jdbc.JDBCDriver";
     private Connection connection = null;
     private Statement statement  = null;
     private final String DATABASE_NAME = "c:/dp";

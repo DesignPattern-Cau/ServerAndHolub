@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class HolubRepository<T> {
+public class HolubRepository<T> {
 
     private HolubConnection holubConnection;
 

@@ -1,13 +1,15 @@
 package manage.findbook.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Entity
+
 @Getter @Setter
+@Builder
 public class Book {
 
     @Id @GeneratedValue
