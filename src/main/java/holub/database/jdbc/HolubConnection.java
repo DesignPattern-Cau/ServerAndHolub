@@ -35,7 +35,7 @@ public class HolubConnection {
         }
     }
 
-    private void closeDatabase()
+    public void closeDatabase()
     {	try
     {	if(statement != null) statement.close();
         if(connection!= null) connection.close();
@@ -49,4 +49,7 @@ public class HolubConnection {
         return statement.executeQuery(query);
     }
 
+    public int processUpdate(String query) throws SQLException{
+        return statement.executeUpdate(query);
+    }
 }

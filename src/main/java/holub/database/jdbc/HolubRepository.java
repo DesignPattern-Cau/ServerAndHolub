@@ -13,6 +13,11 @@ public class HolubRepository<T> {
         holubConnection.openDatabase();
     }
 
+    public void disconnect(){
+        holubConnection.closeDatabase();
+    }
+
+
     private final GenericMapperFactory genericMapperFactory = new GenericMapperFactory();
     public List<T> processSelect(String className, String query){
         className = Character.toUpperCase(className.trim().charAt(0)) + className.trim().substring(1);
@@ -30,7 +35,7 @@ public class HolubRepository<T> {
 
     public int processUpdate(String className, String query){
         try{
-            holubConnection.processSQL(query);
+            holubConnection.processUpdate(query);
             return 1;
         }catch (Exception e){
             return 0;

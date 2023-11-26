@@ -21,6 +21,7 @@ public class BookMapper<T> implements DataMapper<T> {
     @Override
     public List<T> mapResultSetToObject(ResultSet resultSet) throws SQLException {
         List<T> result = new ArrayList<>();
+        //TODO : design pattern?
         while(resultSet.next()){
             Book target = Book.builder()
                     .id(resultSet.getLong("book_idx"))
@@ -28,11 +29,13 @@ public class BookMapper<T> implements DataMapper<T> {
                     .price(resultSet.getInt("price"))
                     .quantity(resultSet.getInt("quantity"))
                     .sales(resultSet.getInt("sales"))
-                    .page(resultSet.getInt("size"))
-                    .registered_at(LocalDateTime.parse(resultSet.getString("registered_at")))
+                    .page(resultSet.getInt("page"))
+                    .registered_at(resultSet.getString("registered_at"))
                     .title(resultSet.getString("title"))
                     .description(resultSet.getString("description"))
-                    .ISBN(resultSet.getString("ISBN")).build();
+                    .ISBN(resultSet.getString("ISBN"))
+                    .authorId(resultSet.getLong("author_id"))
+                    .categoryId(resultSet.getLong("category_id")).build();
             result.add((T) target);
         }
         return result;
