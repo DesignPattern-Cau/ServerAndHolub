@@ -12,9 +12,9 @@ import java.util.List;
 
 @Service
 public class SearchService {
-    private HolubRepository<Book> bookHolubRepository =new HolubRepository<>();
-    private HolubRepository<Author> authorHolubRepository = new HolubRepository<>();
-    private HolubRepository<Category> categoryHolubRepository = new HolubRepository<>();
+    private final HolubRepository<Book> bookHolubRepository =new HolubRepository<>();
+    private final HolubRepository<Author> authorHolubRepository = new HolubRepository<>();
+    private final HolubRepository<Category> categoryHolubRepository = new HolubRepository<>();
 
 
     @PreDestroy
@@ -32,18 +32,15 @@ public class SearchService {
                 " WHERE Book.author_id = Author.author_id and Book.category_id = Category.category_id " +
                 " and ");
         if(type.equals("author")){
-            queryBuilder.append("Author.name like \'%"+keyword+"%\' " );
+            queryBuilder.append("Author.name like \'%").append(keyword).append("%\' ");
         }
         else{
-            queryBuilder.append("Book.title like \'%"+keyword+"%\' ");
+            queryBuilder.append("Book.title like \'%").append(keyword).append("%\' ");
         }
         int offset = page * size;
-        queryBuilder.append(" order by Book.book_id limit "+size+" offset "+ offset);
+        queryBuilder.append(" order by Book.book_id limit ").append(size).append(" offset ").append(offset);
 
         List<Book> book = bookHolubRepository.processSelect("book", queryBuilder.toString());
-        for (Book book1 : book) {
-            System.out.println("book1 = " + book1);
-        }
 
 
         return book.stream()
@@ -57,6 +54,7 @@ public class SearchService {
                         .description(target.getDescription())
                         .registered_at(target.getRegistered_at())
                         .ISBN(target.getISBN())
+                        .likes(target.getLikes())
                         .page(target.getPage())
                         .canBorrow(target.isCanBorrow())
                         .imgURL(target.getImgURL())

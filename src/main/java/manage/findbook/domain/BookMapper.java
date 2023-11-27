@@ -35,6 +35,7 @@ public class BookMapper<T> implements DataMapper<T> {
                     .description(resultSet.getString("description"))
                     .ISBN(resultSet.getString("ISBN"))
                     .authorId(resultSet.getLong("author_id"))
+                    .likes(resultSet.getInt("likes"))
                     .categoryId(resultSet.getLong("category_id"))
                     .imgURL(resultSet.getString("img_url"))
                     .build();
