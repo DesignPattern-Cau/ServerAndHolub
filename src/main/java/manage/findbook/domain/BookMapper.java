@@ -35,7 +35,10 @@ public class BookMapper<T> implements DataMapper<T> {
                     .description(resultSet.getString("description"))
                     .ISBN(resultSet.getString("ISBN"))
                     .authorId(resultSet.getLong("author_id"))
-                    .categoryId(resultSet.getLong("category_id")).build();
+                    .categoryId(resultSet.getLong("category_id"))
+                    .imgURL(resultSet.getString("img_url"))
+                    .build();
+            target.setCanBorrow(target.getQuantity() > 0);
             result.add((T) target);
         }
         return result;

@@ -20,7 +20,7 @@ public class PeopleMapper<T> implements DataMapper<T>{
         while(resultSet.next()){
             String first = resultSet.getString("first");
             String last = resultSet.getString("last");
-            Integer addrId = resultSet.getInt("addrId");
+            int addrId = resultSet.getInt("addrId");
             People people = new People(last,first,addrId);
             resultList.add((T) people);
         }

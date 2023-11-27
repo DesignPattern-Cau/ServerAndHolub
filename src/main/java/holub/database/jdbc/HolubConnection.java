@@ -5,10 +5,10 @@ import java.sql.*;
 
 public class HolubConnection {
     private static HolubConnection INSTANCE = null;
-    private static final String driverName = "holub.database.jdbc.JDBCDriver";
+    private static final String DRIVER_NAME = "holub.database.jdbc.JDBCDriver";
     private Connection connection = null;
     private Statement statement  = null;
-    private final String DATABASE_NAME = "c:/dp";
+    private static final String DATABASE_NAME = "c:/dp";
 
     private HolubConnection(){}
 
@@ -25,7 +25,7 @@ public class HolubConnection {
         File database = new File( DATABASE_NAME );
         try
         {
-            Class.forName( driverName ).newInstance();
+            Class.forName(DRIVER_NAME).newInstance();
             connection = DriverManager.getConnection("file:/"+DATABASE_NAME, "harpo", "swordfish");
             statement = connection.createStatement();
         }

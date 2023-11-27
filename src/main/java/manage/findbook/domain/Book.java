@@ -28,6 +28,8 @@ public class Book {
     private String ISBN;
     private long authorId;
     private long categoryId;
+    private boolean canBorrow;
+    private String imgURL;
 
     @OneToOne
     @JoinColumn(name = "author_id")

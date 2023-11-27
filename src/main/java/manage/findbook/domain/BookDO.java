@@ -4,11 +4,9 @@ package manage.findbook.domain;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Builder
 @Data
-public class BookListDO {
+public class BookDO {
 
     private Long bookIdx;
     private String title;
@@ -22,6 +20,8 @@ public class BookListDO {
     private String registeredAt;
     private String ISBN;
     private Integer page;
+    private boolean canBorrow;
+    private String imgURL;
 
 
 }

@@ -1,13 +1,13 @@
 package manage.findbook.Service;
 
 import holub.database.jdbc.HolubRepository;
+import jakarta.annotation.PreDestroy;
 import manage.findbook.domain.Author;
 import manage.findbook.domain.Book;
-import manage.findbook.domain.BookListDO;
+import manage.findbook.domain.BookDO;
 import manage.findbook.domain.Category;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,7 +16,15 @@ public class SearchService {
     private HolubRepository<Author> authorHolubRepository = new HolubRepository<>();
     private HolubRepository<Category> categoryHolubRepository = new HolubRepository<>();
 
-    public List<BookListDO> getBookListPage(String type, String keyword, int page, int size){
+
+    @PreDestroy
+    public void cleanUp(){
+        bookHolubRepository.disconnect();
+        authorHolubRepository.disconnect();
+        categoryHolubRepository.disconnect();
+    }
+
+    public List<BookDO> getBookListPage(String type, String keyword, int page, int size){
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT " +
                 " * " +
@@ -31,14 +39,15 @@ public class SearchService {
         }
         int offset = page * size;
         queryBuilder.append(" order by Book.book_id limit "+size+" offset "+ offset);
-        System.out.println("queryBuilder.toString() = " + queryBuilder.toString());
+
         List<Book> book = bookHolubRepository.processSelect("book", queryBuilder.toString());
         for (Book book1 : book) {
             System.out.println("book1 = " + book1);
         }
 
-        List<BookListDO> resultList = book.stream()
-                .map(target -> BookListDO.builder()
+
+        return book.stream()
+                .map(target -> BookDO.builder()
                         .bookIdx(target.getId())
                         .title(target.getTitle())
                         .price(target.getPrice())
@@ -50,12 +59,10 @@ public class SearchService {
                         .registeredAt(target.getRegistered_at())
                         .ISBN(target.getISBN())
                         .page(target.getPage())
+                        .canBorrow(target.isCanBorrow())
+                        .imgURL(target.getImgURL())
                         .build()
                 ).toList();
-
-
-
-        return resultList;
     }
 
 }

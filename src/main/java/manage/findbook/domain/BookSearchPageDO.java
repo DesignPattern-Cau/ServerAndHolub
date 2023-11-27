@@ -10,5 +10,5 @@ import java.util.List;
 public class BookSearchPageDO {
     private int page;
     private int size;
-    List<BookListDO> results;
+    List<BookDO> results;
 }
