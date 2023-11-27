@@ -8,16 +8,16 @@ import lombok.Data;
 @Data
 public class BookDO {
 
-    private Long bookIdx;
+    private Long book_idx;
     private String title;
     private Integer price;
     private Integer quantity;
-    private String authorName;
+    private String author_name;
     private Integer sales;
     private String category;
     private Integer likes;
     private String description;
-    private String registeredAt;
+    private String registered_at;
     private String ISBN;
     private Integer page;
     private boolean canBorrow;

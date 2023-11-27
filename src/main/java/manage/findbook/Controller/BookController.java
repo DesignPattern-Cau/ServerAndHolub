@@ -26,7 +26,7 @@ public class BookController {
             @RequestParam(defaultValue = "10") int size){
         try{
             List<BookDO> resultPage = searchService.getBookListPage(type, keyword, page, size);
-            return new BookSearchPageDO(page,size,resultPage);
+            return new BookSearchPageDO(resultPage);
         }catch (Exception e){
             return null;
         }

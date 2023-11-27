@@ -47,15 +47,15 @@ public class SearchService {
 
 
         return book.stream()
-                .map(target -> BookDO.builder().bookIdx(target.getId())
+                .map(target -> BookDO.builder().book_idx(target.getId())
                         .title(target.getTitle())
                         .price(target.getPrice())
                         .quantity(target.getQuantity())
-                        .authorName(authorHolubRepository.processSelect("author","select * from author where author_id = "+target.getAuthorId() ).get(0).getName())
+                        .author_name(authorHolubRepository.processSelect("author","select * from author where author_id = "+target.getAuthorId() ).get(0).getName())
                         .sales(target.getSales())
                         .category(categoryHolubRepository.processSelect("Category","select * from category where category_id = " + target.getCategoryId()).get(0).getName())
                         .description(target.getDescription())
-                        .registeredAt(target.getRegistered_at())
+                        .registered_at(target.getRegistered_at())
                         .ISBN(target.getISBN())
                         .page(target.getPage())
                         .canBorrow(target.isCanBorrow())
