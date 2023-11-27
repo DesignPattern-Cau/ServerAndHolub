@@ -8,5 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class BookSearchPageDO {
-    List<BookDO> bookList;
+    private int page;
+    private int size;
+    List<BookDO> results;
 }
