@@ -47,8 +47,7 @@ public class SearchService {
 
 
         return book.stream()
-                .map(target -> BookDO.builder()
-                        .bookIdx(target.getId())
+                .map(target -> BookDO.builder().bookIdx(target.getId())
                         .title(target.getTitle())
                         .price(target.getPrice())
                         .quantity(target.getQuantity())
