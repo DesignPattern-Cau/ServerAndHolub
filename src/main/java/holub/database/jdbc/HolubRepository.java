@@ -7,6 +7,7 @@ import java.util.List;
 public class HolubRepository<T> {
 
     private HolubConnection holubConnection;
+    private final MapperFactory genericMapperFactory = new GenericMapperFactory();
 
     public HolubRepository() {
         this.holubConnection = HolubConnection.getInstance();
@@ -17,15 +18,18 @@ public class HolubRepository<T> {
         holubConnection.closeDatabase();
     }
 
+    public void reconnect(){
+        holubConnection.openDatabase();
+    }
 
-    private final GenericMapperFactory genericMapperFactory = new GenericMapperFactory();
     public List<T> processSelect(String className, String query){
         className = Character.toUpperCase(className.trim().charAt(0)) + className.trim().substring(1);
-        DataMapper<T> mapper = GenericMapperFactory.createMapper(className);
+        DataMapper<T> mapper = genericMapperFactory.createMapper(className);
 
         if(mapper == null) return new ArrayList<>();
 
         try{
+
             ResultSet resultSet = holubConnection.processSQL(query);
             return mapper.mapResultSetToObject(resultSet);
         }catch (Exception e){
